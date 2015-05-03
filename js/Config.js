@@ -1,7 +1,7 @@
 if (!window.TapTen) { window.TapTen = new Object();}
 
 
-TapTen.SPAWN_INTERVAL = 3000;  // hexagon spawn interval in ms
+TapTen.SPAWN_INTERVAL = 5000;  // hexagon spawn interval in ms
 TapTen.SPAWN_COUNTS = [2, 3, 4, 5, 6, 7, 8, 9, 10]; // highest amount of hexagons
                                              // spawned per spawn interval depending
                                              // on the current difficulty

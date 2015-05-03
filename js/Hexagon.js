@@ -13,7 +13,7 @@ TapTen.Hexagon = function(parentDiv, app) {
 
   this.hex = document.createElement("div");
   $(this.hex).addClass("hex noselect");
-  $(this.hex).attr("id", "hex_" + this.id);
+  $(this.hex).attr("id", "hex-" + this.id);
 
   this.hexTop = document.createElement("div");
   $(this.hexTop).addClass("top");
@@ -77,11 +77,11 @@ TapTen.Hexagon = function(parentDiv, app) {
     if (!justClear) {
       var difficultyRatio = self.currentCount / TapTen.MAX_COUNTER_VALUE;
 
-      if (difficultyRatio <= 0.333) {
+      if (difficultyRatio <= 0.4) {
         $(self.hexTop).addClass("hex-top-diff1");
         $(self.hexMiddle).addClass("hex-middle-diff1");
         $(self.hexBottom).addClass("hex-bottom-diff1");
-      } else if (difficultyRatio <= 0.666) {
+      } else if (difficultyRatio <= 0.8) {
         $(self.hexTop).addClass("hex-top-diff2");
         $(self.hexMiddle).addClass("hex-middle-diff2");
         $(self.hexBottom).addClass("hex-bottom-diff2");
@@ -98,7 +98,7 @@ TapTen.Hexagon = function(parentDiv, app) {
     this.active = true;
     this.currentCount = counterValue;
     $(this.counter).show();
-    this.updateStyle();
+    this.updateStyle(false);
     this.startCounter();
   };
 

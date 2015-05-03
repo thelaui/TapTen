@@ -9,9 +9,10 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>HexTap</title>
+  <title>TapTen</title>
 
   <!-- Custom CSS -->
+  <link href="css/hexagon.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
 
   <!-- Fonts -->
@@ -33,6 +34,19 @@
 
   <div id="wrapper">
     <div id="hex-container"></div>
+    <div id="score-container">
+      <span id="score-text"> SCORE: </span>
+      <span id="score-number"> 0000000 </span>
+    </div>
+    <br />
+    <div id="countdown-container">
+      <div id="countdown-text">
+      <span id="countdown-amount"> 0 </span>
+      NEW HEXAGONS IN
+      <span id="countdown-number"> 0 </span>
+      SECONDS
+      </div>
+    </div>
   </div>
 
 
@@ -53,8 +67,7 @@
 
   $( document ).ready(function() {
     var app = new TapTen.App();
-    app.spawnHexagons(5,5);
-    // app.run();
+    app.run();
   });
   </script>
 

@@ -1,0 +1,352 @@
+/*
+############################# HEXAGON STYLE ####################################
+*/
+#hex-container {
+  padding-left: 0%;
+  padding-top: 20px;
+  overflow: hidden;
+  padding-bottom: 18px;
+}
+
+@media screen and (min-width:320px) {
+  #hex-container {
+    padding-left: 1%;
+  }
+}
+
+@media screen and (min-width:330px) {
+  #hex-container {
+    padding-left: 2%;
+  }
+}
+
+@media screen and (min-width:340px) {
+  #hex-container {
+    padding-left: 4%;
+  }
+}
+
+@media screen and (min-width:370px) {
+  #hex-container {
+    padding-left: 6%;
+  }
+}
+
+@media screen and (min-width:380px) {
+  #hex-container {
+    padding-left: 8%;
+  }
+}
+
+@media screen and (min-width:390px) {
+  #hex-container {
+    padding-left: 10%;
+  }
+}
+
+@media screen and (min-width:400px) {
+  #hex-container {
+    padding-left: 12%;
+  }
+}
+
+/* jump in hexagon size */
+
+@media screen and (min-width:425px) {
+  #hex-container {
+    padding-left: 1%;
+    padding-bottom: 23px;
+  }
+}
+
+@media screen and (min-width:435px) {
+  #hex-container {
+    padding-left: 2%;
+  }
+}
+
+@media screen and (min-width:445px) {
+  #hex-container {
+    padding-left: 3%;
+  }
+}
+
+@media screen and (min-width:455px) {
+  #hex-container {
+    padding-left: 4%;
+  }
+}
+
+@media screen and (min-width:470px) {
+  #hex-container {
+    padding-left: 6%;
+  }
+}
+
+@media screen and (min-width:490px) {
+  #hex-container {
+    padding-left: 8%;
+  }
+}
+
+@media screen and (min-width:510px) {
+  #hex-container {
+    padding-left: 10%;
+  }
+}
+
+@media screen and (min-width:540px) {
+  #hex-container {
+    padding-left: 12%;
+  }
+}
+
+/* jump in hexagon size */
+
+@media screen and (min-width:560px) {
+  #hex-container {
+    padding-left: 2%;
+    padding-bottom: 30px;
+  }
+}
+
+@media screen and (min-width:570px) {
+  #hex-container {
+    padding-left: 3%;
+  }
+}
+
+@media screen and (min-width:585px) {
+  #hex-container {
+    padding-left: 4%;
+  }
+}
+
+@media screen and (min-width:610px) {
+  #hex-container {
+    padding-left: 6%;
+  }
+}
+
+@media screen and (min-width:650px) {
+  #hex-container {
+    padding-left: 8%;
+  }
+}
+
+@media screen and (min-width:680px) {
+  #hex-container {
+    padding-left: 10%;
+  }
+}
+
+@media screen and (min-width:700px) {
+  #hex-container {
+    padding-left: 12%;
+  }
+}
+
+@media screen and (min-width:730px) {
+  #hex-container {
+    padding-left: 14%;
+  }
+}
+
+@media screen and (min-width:760px) {
+  #hex-container {
+    padding-left: 15%;
+  }
+}
+
+@media screen and (min-width:820px) {
+  #hex-container {
+    padding-left: 17%;
+  }
+}
+
+@media screen and (min-width:850px) {
+  #hex-container {
+    padding-left: 18%;
+  }
+}
+
+
+@media screen and (min-width:900px) {
+  #hex-container {
+    padding-left: 23%;
+  }
+}
+
+
+@media screen and (min-width:1100px) {
+  #hex-container {
+    padding-left: 27%;
+  }
+}
+
+@media screen and (min-width:1250px) {
+  #hex-container {
+    padding-left: 30%;
+  }
+}
+
+@media screen and (min-width:1500px) {
+  #hex-container {
+    padding-left: 35%;
+  }
+}
+
+
+.hex {
+  float: left;
+  margin-left: 3px;
+  margin-bottom: -15px;
+}
+
+.hex .top {
+  width: 0;
+  border-bottom-color: #fff;
+  border-bottom-width: 18px;
+  border-bottom-style: solid;
+  border-left-color: transparent;
+  border-left-width: 30px;
+  border-left-style: solid;
+  border-right-color: transparent;
+  border-right-width: 30px;
+  border-right-style: solid;
+}
+
+.hex .middle {
+  width: 60px;
+  height: 35px;
+  background-color: #fff;
+}
+
+.hex .middle .counter{
+  color: #333;
+  text-align: center;
+  font-size: 1.5em;
+  line-height: 1.5;
+  cursor: default;
+}
+
+.hex .bottom {
+  width: 0;
+  border-top-color: #fff;
+  border-top-width: 18px;
+  border-top-style: solid;
+  border-left-color: transparent;
+  border-left-width: 30px;
+  border-left-style: solid;
+  border-right-color: transparent;
+  border-right-width: 30px;
+  border-right-style: solid;
+}
+
+.hex-row {
+  clear: left;
+}
+.hex-row.even {
+  margin-left: 31px;
+}
+
+@media screen and (min-width:425px) {
+ .hex {
+    margin-bottom: -20px;
+  }
+
+  .hex .top {
+    border-bottom-width: 23px;
+    border-left-width: 40px;
+    border-right-width: 40px;
+  }
+
+  .hex .middle {
+    width: 80px;
+    height: 46px;
+  }
+
+  .hex .middle .counter{
+    font-size: 2em;
+  }
+
+  .hex .bottom {
+    border-top-width: 23px;
+    border-left-width: 40px;
+    border-right-width: 40px;
+  }
+
+  .hex-row.even {
+    margin-left: 41px;
+  }
+}
+
+@media screen and (min-width:560px) {
+ .hex {
+    margin-bottom: -26px;
+  }
+
+  .hex .top {
+    border-bottom-width: 30px;
+    border-left-width: 52px;
+    border-right-width: 52px;
+  }
+
+  .hex .middle {
+    width: 104px;
+    height: 60px;
+  }
+
+  .hex .middle .counter{
+    font-size: 2.5em;
+  }
+
+  .hex .bottom {
+    border-top-width: 30px;
+    border-left-width: 52px;
+    border-right-width: 52px;
+  }
+
+  .hex-row.even {
+    margin-left: 53px;
+  }
+}
+
+
+/* difficulty classes */
+
+.hex-top-diff1 {
+  border-bottom-color: #6c6 !important;
+}
+
+.hex-top-diff2 {
+  border-bottom-color: #ffd146 !important;
+}
+
+.hex-top-diff3 {
+  border-bottom-color: #ff3333 !important;
+}
+
+.hex-middle-diff1 {
+  background: #6c6 !important;
+}
+
+.hex-middle-diff2 {
+  background: #ffd146 !important;
+}
+
+.hex-middle-diff3 {
+  background: #ff3333 !important;
+}
+
+.hex-bottom-diff1 {
+  border-top-color: #6c6 !important;
+}
+
+.hex-bottom-diff2 {
+  border-top-color: #ffd146 !important;
+}
+
+.hex-bottom-diff3 {
+  border-top-color: #ff3333 !important;
+}

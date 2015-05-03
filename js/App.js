@@ -6,6 +6,8 @@ TapTen.App = function() {
   this.score = 0;
   this.currentDifficulty = 0;
   this.difficultyTicker = 0;
+  this.updateCount = 0;
+  this.recentlyUpdated = false;
 
   this.spawnHexagons = function(numCols, numRows) {
     var evenRowNum = Math.floor(numRows/2);
@@ -66,7 +68,14 @@ TapTen.App = function() {
 
   this.increaseScore = function() {
     this.score += 1;
-    console.log(this.score);
+
+    for (var diff = 0; diff < this.currentDifficulty; ++diff) {
+      var exp = Math.pow(10, diff + 1);
+      this.score += exp;
+    }
+
+    $("#score-number").text(TapTen.pad(this.score, 7));
+
     this.difficultyTicker += 1;
     if (this.difficultyTicker >= 10) {
       this.difficultyTicker = 0;
@@ -86,9 +95,29 @@ TapTen.App = function() {
     this.updateHexagons();
 
     var self = this;
+    $("#countdown-number").text(TapTen.SPAWN_INTERVAL / 1000 - self.updateCount);
+
     window.setInterval( function() {
-      self.updateHexagons();
-    }, TapTen.SPAWN_INTERVAL);
+
+      if (!self.recentlyUpdated) {
+        ++self.updateCount;
+
+        if (self.updateCount * 1000 == TapTen.SPAWN_INTERVAL) {
+          self.updateHexagons();
+          self.recentlyUpdated = true;
+        }
+
+      } else {
+        self.recentlyUpdated = false;
+        self.updateCount = 0;
+      }
+
+      $("#countdown-amount").text(TapTen.SPAWN_COUNTS[self.currentDifficulty]);
+      $("#countdown-number").text(TapTen.SPAWN_INTERVAL / 1000 - self.updateCount);
+
+    }, 1000);
   }
+
+  this.spawnHexagons(5,5);
 }
 
