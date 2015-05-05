@@ -201,6 +201,10 @@
   float: left;
   margin-left: 3px;
   margin-bottom: -15px;
+  color: #333;
+  text-align: center;
+  font-size: 0.8em;
+  line-height: 2.5em;
 }
 
 .hex .top {
@@ -220,13 +224,15 @@
   width: 60px;
   height: 35px;
   background-color: #fff;
+  /*background-image: url("../img/hex_bg.jpg");*/
 }
 
 .hex .middle .counter{
   color: #333;
   text-align: center;
-  font-size: 1.5em;
-  line-height: 1.5;
+  font-size: 1.8em;
+  font-weight: bold;
+  line-height: 1.4em;
   cursor: default;
 }
 
@@ -253,6 +259,8 @@
 @media screen and (min-width:425px) {
  .hex {
     margin-bottom: -20px;
+    font-size: 1em;
+    line-height: 2.9em;
   }
 
   .hex .top {
@@ -284,6 +292,7 @@
 @media screen and (min-width:560px) {
  .hex {
     margin-bottom: -26px;
+    font-size: 1.3em;
   }
 
   .hex .top {
@@ -299,6 +308,7 @@
 
   .hex .middle .counter{
     font-size: 2.5em;
+    line-height: 1.2em;
   }
 
   .hex .bottom {
@@ -310,6 +320,27 @@
   .hex-row.even {
     margin-left: 53px;
   }
+}
+
+/* special start hexagons */
+
+.hex-title {
+  font-size: 1.6em !important;
+  /*font-weight: bold;*/
+}
+
+.hex-start-top {
+  border-bottom-color: #6c6 !important;
+}
+
+.hex-start-middle {
+  font-size: 2em !important;
+  background-color: #6c6 !important;
+  cursor: pointer;
+}
+
+.hex-start-bottom {
+  border-top-color: #6c6 !important;
 }
 
 

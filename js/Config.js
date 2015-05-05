@@ -14,5 +14,11 @@ TapTen.COUNTER_RESET_INTERVAL = 1000; // time a counter waits to continue increa
 TapTen.SPAWN_COUNTER_MIN_VALUES = [1, 1, 1, 1, 2, 2, 2, 3, 3];
 TapTen.SPAWN_COUNTER_MAX_VALUES = [3, 4, 4, 4, 5, 5, 6, 7, 8];
 
-
+TapTen.HEXAGON_INITIAL_TEXTS = [
+  "", "", "TAPTEN", "", "",
+  "TAP", "HEXAGONS", "TO REDUCE", "COUNTERS!",
+  "", "", "START", "", "",
+  "DIFFICULTY", "WILL", "INCREASE", "OVER TIME!",
+  "YOU LOSE", "IF ALL", "HEXAGONS", "HAVE", "COUNTERS!"
+];
 

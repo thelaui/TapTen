@@ -5,7 +5,7 @@
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -17,7 +17,7 @@
 
   <!-- Fonts -->
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=Chango' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
 
   <link rel="icon" type="image/png" href="img/favicon.png" />
 
@@ -33,6 +33,12 @@
 <body>
 
   <div id="wrapper">
+    <!-- <div id="overlay">
+      <div id="info-container">
+        <div id="button-start"> START!</div>
+      </div>
+    </div>
+ -->
     <div id="hex-container"></div>
     <div id="score-container">
       <span id="score-text"> SCORE: </span>
@@ -47,6 +53,7 @@
       SECONDS
       </div>
     </div>
+
   </div>
 
 
@@ -67,7 +74,7 @@
 
   $( document ).ready(function() {
     var app = new TapTen.App();
-    app.run();
+    // app.run();
   });
   </script>
 

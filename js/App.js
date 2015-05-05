@@ -9,7 +9,9 @@ TapTen.App = function() {
   this.updateCount = 0;
   this.recentlyUpdated = false;
 
-  this.spawnHexagons = function(numCols, numRows) {
+  this.spawnHexagons = function() {
+    var numCols = 5;
+    var numRows = 5;
     var evenRowNum = Math.floor(numRows/2);
     this.hexagons = new Array(numCols * numRows - evenRowNum);
 
@@ -28,10 +30,19 @@ TapTen.App = function() {
 
       for(var x=0; x<cols; ++x) {
         var hex = new TapTen.Hexagon(row, this);
+
         this.hexagons[rowOffset + x] = hex;
       }
       $("#hex-container").append(row);
       rowOffset += cols;
+    }
+  };
+
+  this.despawnHexagons = function() {
+    var totalHexagonNum = this.hexagons.length;
+
+    for (var hex = 0; hex < totalHexagonNum; ++hex) {
+      $(this.hexagons[hex].hex).remove();
     }
   };
 
@@ -67,17 +78,17 @@ TapTen.App = function() {
   }
 
   this.increaseScore = function() {
-    this.score += 1;
+    this.score += this.currentDifficulty + 1;
 
-    for (var diff = 0; diff < this.currentDifficulty; ++diff) {
-      var exp = Math.pow(10, diff + 1);
-      this.score += exp;
-    }
+    // for (var diff = 0; diff < this.currentDifficulty; ++diff) {
+    //   var exp = Math.pow(10, diff + 1);
+    //   this.score += exp;
+    // }
 
     $("#score-number").text(TapTen.pad(this.score, 7));
 
     this.difficultyTicker += 1;
-    if (this.difficultyTicker >= 10) {
+    if (this.difficultyTicker >= 100) {
       this.difficultyTicker = 0;
       this.increaseDifficulty();
     }
@@ -118,6 +129,23 @@ TapTen.App = function() {
     }, 1000);
   }
 
-  this.spawnHexagons(5,5);
+  this.spawnHexagons();
+  var totalHexagonNum = this.hexagons.length;
+
+  for (var hex = 0; hex < totalHexagonNum; ++hex) {
+    $(this.hexagons[hex].hexMiddle).text(TapTen.HEXAGON_INITIAL_TEXTS[hex]);
+  }
+
+  $(this.hexagons[2].hexMiddle).addClass("hex-title");
+  $(this.hexagons[11].hexTop).addClass("hex-start-top");
+  $(this.hexagons[11].hexMiddle).addClass("hex-start-middle");
+  $(this.hexagons[11].hexBottom).addClass("hex-start-bottom");
+
+  var self = this;
+  $(this.hexagons[11].hex).click( function() {
+    self.despawnHexagons();
+    self.spawnHexagons();
+    self.run();
+  });
 }
 

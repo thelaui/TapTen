@@ -42,7 +42,7 @@ TapTen.Hexagon = function(parentDiv, app) {
       self.updateStyle(false);
       window.clearInterval(self.counterIntervalId);
       window.clearTimeout(self.counterResetTimeoutlId);
-
+      self.app.increaseScore();
       if (self.currentCount <= 0) {
         self.deactivate();
       } else {
@@ -105,7 +105,7 @@ TapTen.Hexagon = function(parentDiv, app) {
   this.deactivate = function() {
     this.active = false;
     this.currentCount = 1;
-    this.app.increaseScore();
+    // this.app.increaseScore();
     this.updateStyle(true);
     $(this.counter).hide();
   };

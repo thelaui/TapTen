@@ -19,21 +19,37 @@ body {
 
 #wrapper {
   width: 100%;
-  font-family: 'Chango', cursive;
-  font-weight: bold;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+#overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+}
+
+#info-container {
+  background-color: white;
+  width: 400px;
+  height: 400px;
+  margin-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #score-container {
   text-align: center;
   color: white;
-  font-size: 1.5em;
-  line-height: 1.5;
-  margin-top: 60px;
+  font-size: 2.5em;
+  line-height: 1em;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #score-number {
   display: inline-block;
-  width: 150px;
 }
 
 #countdown-amount {
@@ -44,36 +60,13 @@ body {
 #countdown-container {
   text-align: center;
   color: white;
-  font-size: 1em;
-  line-height: 1.5;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #countdown-number {
   display: inline-block;
   width: 20px;
-}
-
-
-@media screen and (min-width:425px) {
-  #score-container {
-    font-size: 2em;
-  }
-
-  #score-number {
-    width: 200px;
-  }
-}
-
-@media screen and (min-width:520px) {
-  #score-container {
-    font-size: 2.5em;
-  }
-
-  #score-number {
-    width: 250px;
-  }
-
-  #countdown-container {
-    font-size: 1.2em;
-  }
 }
