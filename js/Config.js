@@ -21,7 +21,7 @@ TapTen.HEXAGON_START_TEXTS = [
 
 TapTen.HEXAGON_END_TEXTS = [
   "", "YOUR", "TIME", "IS UP!", "",
-  "DO", "YOU", "MIND", "SHARING?",
+  "WOULD", "YOU", "MIND", "SHARING?",
   "", "", "", "", "",
   "", "", "", "",
   "", "QUIT", "", "RETRY", ""

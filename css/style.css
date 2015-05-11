@@ -70,3 +70,7 @@ body {
   display: inline-block;
   width: 20px;
 }
+
+.invisible {
+  display: none !important;
+}
