@@ -241,6 +241,6 @@ TapTen.App = function() {
     });
   }
 
-  this.showStart();
+  this.showEnd();
 }
 
