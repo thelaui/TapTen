@@ -322,7 +322,7 @@
   }
 }
 
-/* special start hexagons */
+/* special hexagons */
 
 .hex-title {
   font-size: 1.6em !important;
@@ -343,7 +343,66 @@
   border-top-color: #6c6 !important;
 }
 
+.hex-end-top {
+  border-bottom-color: #ff3333 !important;
+}
 
+.hex-end-middle {
+  /*font-size: 2em !important;*/
+  background-color: #ff3333 !important;
+  cursor: pointer;
+}
+
+.hex-end-bottom {
+  border-top-color: #ff3333 !important;
+}
+
+
+.hex-facebook-top {
+  border-bottom-color: #3a5795 !important;
+}
+
+.hex-facebook-middle {
+  color: white !important;
+  font-size: 2em !important;
+  background-color: #3a5795 !important;
+  cursor: pointer;
+}
+
+.hex-facebook-bottom {
+  border-top-color: #3a5795 !important;
+}
+
+
+.hex-google-top {
+  border-bottom-color: #d34836 !important;
+}
+
+.hex-google-middle {
+  color: white !important;
+  font-size: 2em !important;
+  background-color: #d34836 !important;
+  cursor: pointer;
+}
+
+.hex-google-bottom {
+  border-top-color: #d34836 !important;
+}
+
+.hex-twitter-top {
+  border-bottom-color: #4099ff !important;
+}
+
+.hex-twitter-middle {
+  color: white !important;
+  font-size: 2em !important;
+  background-color: #4099ff !important;
+  cursor: pointer;
+}
+
+.hex-twitter-bottom {
+  border-top-color: #4099ff !important;
+}
 /* difficulty classes */
 
 .hex-top-diff1 {

@@ -32,13 +32,27 @@
 
 <body>
 
+  <!-- load sdks -->
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '681779118632267',
+        xfbml      : true,
+        version    : 'v2.3'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
+
   <div id="wrapper">
-    <!-- <div id="overlay">
-      <div id="info-container">
-        <div id="button-start"> START!</div>
-      </div>
-    </div>
- -->
+
     <div id="hex-container"></div>
     <div id="score-container">
       <span id="score-text"> SCORE: </span>

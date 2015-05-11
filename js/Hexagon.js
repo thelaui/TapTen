@@ -105,8 +105,9 @@ TapTen.Hexagon = function(parentDiv, app) {
   this.deactivate = function() {
     this.active = false;
     this.currentCount = 1;
-    // this.app.increaseScore();
     this.updateStyle(true);
+    window.clearInterval(this.counterIntervalId);
+    window.clearTimeout(this.counterResetTimeoutlId);
     $(this.counter).hide();
   };
 
