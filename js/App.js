@@ -103,8 +103,8 @@ TapTen.App = function() {
     this.updateCount = 0;
     this.recentlyUpdated = false;
 
-    $("#score-container").removeClass("invisible");
-    $("#countdown-container").removeClass("invisible");
+    $("#score-container").show();
+    $("#countdown-container").show();
     $("#score-number").text(TapTen.pad(this.score, 7));
 
     this.updateHexagons();
@@ -146,8 +146,8 @@ TapTen.App = function() {
   }
 
   this.showStart = function() {
-    $("#score-container").addClass("invisible");
-    $("#countdown-container").addClass("invisible");
+    $("#score-container").hide();
+    $("#countdown-container").hide();
 
     this.despawnHexagons();
     this.spawnHexagons();
@@ -171,7 +171,7 @@ TapTen.App = function() {
   }
 
   this.showEnd = function() {
-    $("#countdown-container").addClass("invisible");
+    $("#countdown-container").hide();
 
     this.despawnHexagons();
     this.spawnHexagons();
@@ -216,14 +216,18 @@ TapTen.App = function() {
     $(this.hexagons[11].hexMiddle).append(googleIcon);
 
     $(this.hexagons[11].hex).click(function(){
-      window.open("https://plus.google.com/share?url=thelaui.github.io/TapTen",
-                  '', "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600");
+      TapTen.socialPopup("google");
       return false;
     });
 
     $(this.hexagons[12].hexTop).addClass("hex-twitter-top");
     $(this.hexagons[12].hexMiddle).addClass("hex-twitter-middle");
     $(this.hexagons[12].hexBottom).addClass("hex-twitter-bottom");
+
+    $(this.hexagons[12].hex).click(function(){
+      TapTen.socialPopup("twitter");
+      return false;
+    });
 
     var twitterIcon = document.createElement("div");
     $(twitterIcon).addClass("fa fa-twitter");
