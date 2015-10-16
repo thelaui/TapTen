@@ -19,8 +19,16 @@ TapTen.HEXAGON_START_TEXTS = [
   "YOU LOSE", "IF ALL", "HEXAGONS", "HAVE", "COUNTERS!"
 ];
 
-TapTen.HEXAGON_END_TEXTS = [
+TapTen.HEXAGON_TIME_UP_TEXTS = [
+  "", "", "", "", "",
+  "", "", "", "",
   "", "YOUR", "TIME", "IS UP!", "",
+  "", "", "", "",
+  "", "", "", "", ""
+];
+
+TapTen.HEXAGON_END_TEXTS = [
+  "", "", "", "", "",
   "WOULD", "YOU", "MIND", "SHARING?",
   "", "", "", "", "",
   "", "", "", "",

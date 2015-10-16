@@ -97,7 +97,7 @@ TapTen.App = function() {
 
   this.run = function() {
     this.score = 0;
-    this.hexagonsToBeSelected = 10;
+    this.hexagonsToBeSelected = 3;
     this.currentDifficulty = 0;
     this.difficultyTicker = 0;
     this.updateCount = 0;
@@ -176,75 +176,85 @@ TapTen.App = function() {
     this.despawnHexagons();
     this.spawnHexagons();
 
+    // first, show time up texts
     var totalHexagonNum = this.hexagons.length;
     for (var hex = 0; hex < totalHexagonNum; ++hex) {
-      $(this.hexagons[hex].hexMiddle).text(TapTen.HEXAGON_END_TEXTS[hex]);
+      $(this.hexagons[hex].hexMiddle).text(TapTen.HEXAGON_TIME_UP_TEXTS[hex]);
     }
 
-    $(this.hexagons[1].hexMiddle).addClass("hex-title");
-    $(this.hexagons[2].hexMiddle).addClass("hex-title");
-    $(this.hexagons[3].hexMiddle).addClass("hex-title");
-
-    $(this.hexagons[19].hexTop).addClass("hex-end-top");
-    $(this.hexagons[19].hexMiddle).addClass("hex-end-middle");
-    $(this.hexagons[19].hexBottom).addClass("hex-end-bottom");
-
-    $(this.hexagons[21].hexTop).addClass("hex-start-top");
-    $(this.hexagons[21].hexMiddle).addClass("hex-start-middle");
-    $(this.hexagons[21].hexBottom).addClass("hex-start-bottom");
-
-    $(this.hexagons[10].hexTop).addClass("hex-facebook-top");
-    $(this.hexagons[10].hexMiddle).addClass("hex-facebook-middle");
-    $(this.hexagons[10].hexBottom).addClass("hex-facebook-bottom");
-
-    var facebookIcon = document.createElement("div");
-    $(facebookIcon).addClass("fa fa-facebook");
-    $(this.hexagons[10].hexMiddle).append(facebookIcon);
-
-    $(this.hexagons[10].hex).click(function(){
-      FB.ui({
-        method: 'share',
-        href: 'thelaui.github.io/TapTen',
-      }, function(response){});
-    });
-    $(this.hexagons[11].hexTop).addClass("hex-google-top");
-    $(this.hexagons[11].hexMiddle).addClass("hex-google-middle");
-    $(this.hexagons[11].hexBottom).addClass("hex-google-bottom");
-
-    var googleIcon = document.createElement("div");
-    $(googleIcon).addClass("fa fa-google-plus");
-    $(this.hexagons[11].hexMiddle).append(googleIcon);
-
-    $(this.hexagons[11].hex).click(function(){
-      TapTen.socialPopup("google");
-      return false;
-    });
-
-    $(this.hexagons[12].hexTop).addClass("hex-twitter-top");
-    $(this.hexagons[12].hexMiddle).addClass("hex-twitter-middle");
-    $(this.hexagons[12].hexBottom).addClass("hex-twitter-bottom");
-
-    $(this.hexagons[12].hex).click(function(){
-      TapTen.socialPopup("twitter");
-      return false;
-    });
-
-    var twitterIcon = document.createElement("div");
-    $(twitterIcon).addClass("fa fa-twitter");
-    $(this.hexagons[12].hexMiddle).append(twitterIcon);
-
     var self = this;
-    $(this.hexagons[19].hex).click( function() {
-      self.showStart();
-    });
+    // after some time, show replay/share screen
+    window.setTimeout(function() {
+      console.log(self);
+      for (var hex = 0; hex < totalHexagonNum; ++hex) {
+        $(self.hexagons[hex].hexMiddle).text(TapTen.HEXAGON_END_TEXTS[hex]);
+      }
 
-    $(this.hexagons[21].hex).click( function() {
-      self.despawnHexagons();
-      self.spawnHexagons();
-      self.run();
-    });
+      $(self.hexagons[1].hexMiddle).addClass("hex-title");
+      $(self.hexagons[2].hexMiddle).addClass("hex-title");
+      $(self.hexagons[3].hexMiddle).addClass("hex-title");
+
+      $(self.hexagons[19].hexTop).addClass("hex-end-top");
+      $(self.hexagons[19].hexMiddle).addClass("hex-end-middle");
+      $(self.hexagons[19].hexBottom).addClass("hex-end-bottom");
+
+      $(self.hexagons[21].hexTop).addClass("hex-start-top");
+      $(self.hexagons[21].hexMiddle).addClass("hex-start-middle");
+      $(self.hexagons[21].hexBottom).addClass("hex-start-bottom");
+
+      $(self.hexagons[10].hexTop).addClass("hex-facebook-top");
+      $(self.hexagons[10].hexMiddle).addClass("hex-facebook-middle");
+      $(self.hexagons[10].hexBottom).addClass("hex-facebook-bottom");
+
+      var facebookIcon = document.createElement("div");
+      $(facebookIcon).addClass("fa fa-facebook");
+      $(self.hexagons[10].hexMiddle).append(facebookIcon);
+
+      $(self.hexagons[10].hex).click(function(){
+        FB.ui({
+          method: 'share',
+          href: 'thelaui.github.io/TapTen',
+        }, function(response){});
+      });
+      $(self.hexagons[11].hexTop).addClass("hex-google-top");
+      $(self.hexagons[11].hexMiddle).addClass("hex-google-middle");
+      $(self.hexagons[11].hexBottom).addClass("hex-google-bottom");
+
+      var googleIcon = document.createElement("div");
+      $(googleIcon).addClass("fa fa-google-plus");
+      $(self.hexagons[11].hexMiddle).append(googleIcon);
+
+      $(self.hexagons[11].hex).click(function(){
+        TapTen.socialPopup("google");
+        return false;
+      });
+
+      $(self.hexagons[12].hexTop).addClass("hex-twitter-top");
+      $(self.hexagons[12].hexMiddle).addClass("hex-twitter-middle");
+      $(self.hexagons[12].hexBottom).addClass("hex-twitter-bottom");
+
+      $(self.hexagons[12].hex).click(function(){
+        TapTen.socialPopup("twitter");
+        return false;
+      });
+
+      var twitterIcon = document.createElement("div");
+      $(twitterIcon).addClass("fa fa-twitter");
+      $(self.hexagons[12].hexMiddle).append(twitterIcon);
+
+      $(self.hexagons[19].hex).click( function() {
+        self.showStart();
+      });
+
+      $(self.hexagons[21].hex).click( function() {
+        self.despawnHexagons();
+        self.spawnHexagons();
+        self.run();
+      });
+    }, 2000);
+
   }
 
-  this.showEnd();
+  this.showStart();
 }
 

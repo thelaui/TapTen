@@ -348,7 +348,7 @@
 }
 
 .hex-end-middle {
-  /*font-size: 2em !important;*/
+  font-size: 2em !important;
   background-color: #ff3333 !important;
   cursor: pointer;
 }
