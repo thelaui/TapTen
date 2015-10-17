@@ -4,7 +4,7 @@ TapTen.App = function() {
 
   this.hexagons = [];
   this.score = 0;
-  this.hexagonsToBeSelected = 3;
+  this.hexagonsToBeSelected = TapTen.START_HEXAGON_AMOUNT;
   this.currentDifficulty = 0;
   this.difficultyTicker = 0;
   this.updateCount = 0;
@@ -97,7 +97,7 @@ TapTen.App = function() {
 
   this.run = function() {
     this.score = 0;
-    this.hexagonsToBeSelected = 3;
+    this.hexagonsToBeSelected = TapTen.START_HEXAGON_AMOUNT;
     this.currentDifficulty = 0;
     this.difficultyTicker = 0;
     this.updateCount = 0;
@@ -157,6 +157,7 @@ TapTen.App = function() {
       $(this.hexagons[hex].hexMiddle).text(TapTen.HEXAGON_START_TEXTS[hex]);
     }
 
+    // $(this.hexagons[1].hexMiddle).addClass("hex-flag-en-middle");
     $(this.hexagons[2].hexMiddle).addClass("hex-title");
     $(this.hexagons[11].hexTop).addClass("hex-start-top");
     $(this.hexagons[11].hexMiddle).addClass("hex-start-middle");

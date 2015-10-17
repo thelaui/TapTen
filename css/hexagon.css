@@ -403,6 +403,13 @@
 .hex-twitter-bottom {
   border-top-color: #4099ff !important;
 }
+
+.hex-flag-en-middle {
+  background: url("../img/flag_en.jpg") !important;
+  background-size: contain !important;
+  cursor: pointer;
+}
+
 /* difficulty classes */
 
 .hex-top-diff1 {
