@@ -458,13 +458,21 @@ TapTen.App = function() {
   var self = this;
   $("#flag-en").click(function() {
     TapTen.LANGUAGE = "en";
+    TapTen.setCookie("selectedLanguage", TapTen.LANGUAGE);
     self.showStart();
   });
 
   $("#flag-de").click(function() {
     TapTen.LANGUAGE = "de";
+    TapTen.setCookie("selectedLanguage", TapTen.LANGUAGE);
     self.showStart();
   });
+
+  // get previously selected language if possible
+  var selectedLanguage = TapTen.getCookie("selectedLanguage");
+  if (selectedLanguage != "") {
+    TapTen.LANGUAGE = selectedLanguage;
+  }
 
   // get previous high score if possible
   var highScore = TapTen.getCookie("highscore");
