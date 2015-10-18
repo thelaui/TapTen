@@ -343,6 +343,32 @@
   border-top-color: #6c6 !important;
 }
 
+.hex-howto-top {
+  border-bottom-color: #ffd146 !important;
+}
+
+.hex-howto-middle {
+  background-color: #ffd146 !important;
+  cursor: pointer;
+}
+
+.hex-howto-bottom {
+  border-top-color: #ffd146 !important;
+}
+
+.hex-neutral-top {
+  border-bottom-color: #ccc !important;
+}
+
+.hex-neutral-middle {
+  background-color: #ccc !important;
+  cursor: pointer;
+}
+
+.hex-neutral-bottom {
+  border-top-color: #ccc !important;
+}
+
 .hex-end-top {
   border-bottom-color: #ff3333 !important;
 }
@@ -411,34 +437,50 @@
   border-bottom-color: #6c6 !important;
 }
 
-.hex-top-diff2 {
-  border-bottom-color: #ffd146 !important;
-}
-
-.hex-top-diff3 {
-  border-bottom-color: #ff3333 !important;
-}
-
 .hex-middle-diff1 {
   background: #6c6 !important;
-}
-
-.hex-middle-diff2 {
-  background: #ffd146 !important;
-}
-
-.hex-middle-diff3 {
-  background: #ff3333 !important;
 }
 
 .hex-bottom-diff1 {
   border-top-color: #6c6 !important;
 }
 
+.hex-top-diff2 {
+  border-bottom-color: #ffd146 !important;
+}
+
+.hex-middle-diff2 {
+  background: #ffd146 !important;
+}
+
 .hex-bottom-diff2 {
   border-top-color: #ffd146 !important;
 }
 
+.hex-top-diff3 {
+  border-bottom-color: #ff3333 !important;
+}
+
+.hex-middle-diff3 {
+  background: #ff3333 !important;
+}
+
 .hex-bottom-diff3 {
   border-top-color: #ff3333 !important;
+}
+
+.hex-top-negative {
+  border-bottom-color: black !important;
+}
+
+.hex-middle-negative {
+  background: black !important;
+}
+
+.hex-bottom-negative {
+  border-top-color: black !important;
+}
+
+.counter-negative {
+  color: white !important;
 }

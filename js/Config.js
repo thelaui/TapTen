@@ -1,40 +1,12 @@
 if (!window.TapTen) { window.TapTen = new Object();}
 
-TapTen.LANGUAGE = "en"
+TapTen.LANGUAGE = "de"
 
 TapTen.SPAWN_INTERVAL = 5000;  // hexagon spawn interval in ms
 TapTen.MAX_DIFFICULTY = 23;
 
-TapTen.START_HEXAGON_AMOUNT = 5; // highest value hexagon counters may reach
+TapTen.START_HEXAGON_AMOUNT = 15; // highest value hexagon counters may reach
 TapTen.MAX_COUNTER_VALUE = 10; // highest value hexagon counters may reach
 TapTen.COUNTER_INCREASE_INTERVAL = 1000; // interval in which counters increase in ms
 TapTen.COUNTER_RESET_INTERVAL = 1000; // time a counter waits to continue increasing after clicking in ms
-
-TapTen.SPAWN_COUNTER_MIN_VALUE = 1;
-TapTen.SPAWN_COUNTER_MAX_VALUE = 2;
-
-TapTen.HEXAGON_START_TEXTS = [
-  "", "", "TAP TEN", "", "",
-  "TAP", "HEXAGONS", "TO REDUCE", "COUNTERS!",
-  "", "", "START", "", "",
-  "DIFFICULTY", "WILL", "INCREASE", "OVER TIME!",
-  "YOU LOSE", "IF ALL", "HEXAGONS", "HAVE", "COUNTERS!"
-];
-
-TapTen.HEXAGON_TIME_UP_TEXTS = [
-  "", "", "", "", "",
-  "", "", "", "",
-  "", "YOUR", "TIME", "IS UP!", "",
-  "", "", "", "",
-  "", "", "", "", ""
-];
-
-TapTen.HEXAGON_END_TEXTS = [
-  "", "", "", "", "",
-  "WOULD", "YOU", "MIND", "SHARING?",
-  "", "", "", "", "",
-  "", "", "", "",
-  "", "QUIT", "", "RETRY", ""
-];
-
-
+TapTen.NEGATIVE_NUMBER_CHANCE_LEVEL = 5; // mean percentage of negative numbers

@@ -8,6 +8,7 @@ TapTen.Hexagon = function(parentDiv, app) {
   this.app = app;
   this.currentCount = 1;
   this.active = false;
+  this.isUndying = false;
   this.counterIntervalId = 0;
   this.counterResetTimeoutlId = 0;
 
@@ -29,6 +30,10 @@ TapTen.Hexagon = function(parentDiv, app) {
   $(this.hexMiddle).append(this.counter);
   $(this.counter).hide();
 
+  this.text = document.createElement("div");
+  $(this.text).addClass();
+  $(this.hexMiddle).append(this.text);
+
   this.hexBottom = document.createElement("div");
   $(this.hexBottom).addClass("bottom");
   $(this.hex).append(this.hexBottom);
@@ -42,8 +47,10 @@ TapTen.Hexagon = function(parentDiv, app) {
       self.updateStyle(false);
       window.clearInterval(self.counterIntervalId);
       window.clearTimeout(self.counterResetTimeoutlId);
-      self.app.increaseScore();
-      if (self.currentCount <= 0) {
+      if (self.currentCount >= 0) {
+        self.app.increaseScore();
+      }
+      if (self.currentCount == 0) {
         self.deactivate();
       } else {
         self.counterResetTimeoutlId =
@@ -58,7 +65,11 @@ TapTen.Hexagon = function(parentDiv, app) {
     this.counterIntervalId =
     window.setInterval(function() {
       self.currentCount = Math.min(self.currentCount + 1, TapTen.MAX_COUNTER_VALUE);
-      self.updateStyle(false);
+      if (self.currentCount == 0) {
+        self.deactivate();
+      } else {
+        self.updateStyle(false);
+      }
     }, TapTen.COUNTER_INCREASE_INTERVAL);
   };
 
@@ -67,17 +78,28 @@ TapTen.Hexagon = function(parentDiv, app) {
     $(self.hexTop).removeClass("hex-top-diff1")
     $(self.hexTop).removeClass("hex-top-diff2")
     $(self.hexTop).removeClass("hex-top-diff3")
+    $(self.hexTop).removeClass("hex-top-negative")
     $(self.hexMiddle).removeClass("hex-middle-diff1")
     $(self.hexMiddle).removeClass("hex-middle-diff2")
     $(self.hexMiddle).removeClass("hex-middle-diff3")
+    $(self.hexMiddle).removeClass("hex-middle-negative")
     $(self.hexBottom).removeClass("hex-bottom-diff1")
     $(self.hexBottom).removeClass("hex-bottom-diff2")
     $(self.hexBottom).removeClass("hex-bottom-diff3")
+    $(self.hexBottom).removeClass("hex-bottom-negative")
+
+    $(self.counter).removeClass("counter-negative")
 
     if (!justClear) {
+
       var difficultyRatio = self.currentCount / TapTen.MAX_COUNTER_VALUE;
 
-      if (difficultyRatio <= 0.4) {
+      if (difficultyRatio < 0) {
+        $(self.hexTop).addClass("hex-top-negative");
+        $(self.hexMiddle).addClass("hex-middle-negative");
+        $(self.hexBottom).addClass("hex-bottom-negative");
+        $(self.counter).addClass("counter-negative")
+      } else if (difficultyRatio <= 0.4) {
         $(self.hexTop).addClass("hex-top-diff1");
         $(self.hexMiddle).addClass("hex-middle-diff1");
         $(self.hexBottom).addClass("hex-bottom-diff1");
@@ -94,8 +116,9 @@ TapTen.Hexagon = function(parentDiv, app) {
 
   };
 
-  this.activate = function(counterValue) {
+  this.activate = function(counterValue, isUndying) {
     this.active = true;
+    this.isUndying = isUndying;
     this.currentCount = counterValue;
     $(this.counter).show();
     this.updateStyle(false);
@@ -103,12 +126,21 @@ TapTen.Hexagon = function(parentDiv, app) {
   };
 
   this.deactivate = function() {
-    this.active = false;
     this.currentCount = 1;
     this.updateStyle(true);
+    $(this.counter).hide();
+    this.active = false;
     window.clearInterval(this.counterIntervalId);
     window.clearTimeout(this.counterResetTimeoutlId);
-    $(this.counter).hide();
+
+    if (this.isUndying) {
+      var self = this;
+      window.setTimeout(function() {
+        self.activate(1, true);
+      }
+      , 1000);
+    }
+
   };
 
 

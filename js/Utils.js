@@ -17,7 +17,6 @@ TapTen.socialPopup = function(mode) {
     : mode == "twitter" ? "http://twitter.com/share"
     : "";
 
-  console.log(url)
   var width  = $(window).width() >= 600 ? 600 : 300,
            height = $(window).height() >= 600 ? 600 : 300,
            left   = ($(window).width()  - width)  / 2,
@@ -34,4 +33,28 @@ TapTen.socialPopup = function(mode) {
 
   window.open(url, '', opts);
 
+}
+
+TapTen.setCookie = function(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+TapTen.getCookie = function(cname) {
+  var name = cname + "=";
+  var cookieArray = document.cookie.split(';');
+  var cookieNum = cookieArray.length;
+  for (var i = 0; i < cookieNum; ++i) {
+    var currentCookie = cookieArray[i];
+    while(currentCookie.charAt(0) == ' ') {
+      currentCookie = currentCookie.substring(1);
+    }
+    if (currentCookie.indexOf(name) == 0) {
+      return currentCookie.substring(name.length, currentCookie.length);
+    }
+  }
+
+  return ""
 }

@@ -4,6 +4,7 @@ TapTen.App = function() {
 
   this.hexagons = [];
   this.score = 0;
+  this.currentHighScore = 0;
   this.hexagonsToBeSelected = TapTen.START_HEXAGON_AMOUNT;
   this.currentDifficulty = 0;
   this.difficultyTicker = 0;
@@ -65,15 +66,67 @@ TapTen.App = function() {
       var availableHexagonNum = availableHexagons.length;
       if (availableHexagonNum >= this.hexagonsToBeSelected - elem) {
         var randomId = TapTen.random(0, availableHexagonNum - 1);
-        var counterValue = TapTen.random(TapTen.SPAWN_COUNTER_MIN_VALUE,
-                                         TapTen.SPAWN_COUNTER_MAX_VALUE);
+        var negativeChance = TapTen.random(1, 100);
 
-        availableHexagons[randomId].activate(counterValue);
+        if (negativeChance <= TapTen.NEGATIVE_NUMBER_CHANCE_LEVEL) {
+          availableHexagons[randomId].activate(-5, false);
+        } else {
+          availableHexagons[randomId].activate(1, false);
+        }
       } else {
         this.stop();
         break;
       }
     }
+  }
+
+  this.spawnHexagonText = function(textID) {
+    var totalHexagonNum = this.hexagons.length;
+    for (var hex = 0; hex < totalHexagonNum; ++hex) {
+      $(this.hexagons[hex].text).html(TapTen.LOCALES[TapTen.LANGUAGE][textID][hex]);
+    }
+  }
+
+  this.spawnSocialButtons = function(facebookPos, googlePos, twitterPos) {
+    $(this.hexagons[facebookPos].hexTop).addClass("hex-facebook-top");
+    $(this.hexagons[facebookPos].hexMiddle).addClass("hex-facebook-middle");
+    $(this.hexagons[facebookPos].hexBottom).addClass("hex-facebook-bottom");
+
+    var facebookIcon = document.createElement("div");
+    $(facebookIcon).addClass("fa fa-facebook");
+    $(this.hexagons[facebookPos].hexMiddle).append(facebookIcon);
+
+    $(this.hexagons[facebookPos].hex).click(function(){
+      FB.ui({
+        method: 'share',
+        href: 'thelaui.github.io/TapTen',
+      }, function(response){});
+    });
+    $(this.hexagons[googlePos].hexTop).addClass("hex-google-top");
+    $(this.hexagons[googlePos].hexMiddle).addClass("hex-google-middle");
+    $(this.hexagons[googlePos].hexBottom).addClass("hex-google-bottom");
+
+    var googleIcon = document.createElement("div");
+    $(googleIcon).addClass("fa fa-google-plus");
+    $(this.hexagons[googlePos].hexMiddle).append(googleIcon);
+
+    $(this.hexagons[googlePos].hex).click(function(){
+      TapTen.socialPopup("google");
+      return false;
+    });
+
+    $(this.hexagons[twitterPos].hexTop).addClass("hex-twitter-top");
+    $(this.hexagons[twitterPos].hexMiddle).addClass("hex-twitter-middle");
+    $(this.hexagons[twitterPos].hexBottom).addClass("hex-twitter-bottom");
+
+    $(this.hexagons[twitterPos].hex).click(function(){
+      TapTen.socialPopup("twitter");
+      return false;
+    });
+
+    var twitterIcon = document.createElement("div");
+    $(twitterIcon).addClass("fa fa-twitter");
+    $(this.hexagons[twitterPos].hexMiddle).append(twitterIcon);
   }
 
   this.increaseScore = function() {
@@ -103,18 +156,22 @@ TapTen.App = function() {
     this.updateCount = 0;
     this.recentlyUpdated = false;
 
-    $("#score-container").show();
-    $("#countdown-container").show();
-    $("#language-container").hide();
+    // set languages
     $("#score-text").text(TapTen.LOCALES[TapTen.LANGUAGE]["SCORE_TEXT"]);
-    $("#score-number").text(TapTen.pad(this.score, 7));
+    $("#highscore-text").text(TapTen.LOCALES[TapTen.LANGUAGE]["FORMER_BEST_TEXT"]);
+    $("#countdown-hexagons").text(TapTen.LOCALES[TapTen.LANGUAGE]["COUNTDOWN_HEXAGONS"]);
+    $("#countdown-seconds").text(TapTen.LOCALES[TapTen.LANGUAGE]["COUNTDOWN_SECONDS"]);
 
+    $("#score-container").show();
+    $("#score-container").removeClass("new-high-score");
+    $("#countdown-container").show();
+    $("#highscore-container").hide();
+    $("#language-container").hide();
+    $("#score-number").text(TapTen.pad(this.score, 7));
 
     var self = this;
     this.updateHexagons();
 
-    $("#countdown-hexagons").text(TapTen.LOCALES[TapTen.LANGUAGE]["COUNTDOWN_HEXAGONS"]);
-    $("#countdown-seconds").text(TapTen.LOCALES[TapTen.LANGUAGE]["COUNTDOWN_SECONDS"]);
     $("#countdown-number").text(TapTen.SPAWN_INTERVAL / 1000 - self.updateCount);
     $("#countdown-amount").text(self.hexagonsToBeSelected);
 
@@ -147,37 +204,55 @@ TapTen.App = function() {
     for (var hex = 0; hex < totalHexagonNum; ++hex) {
       this.hexagons[hex].deactivate();
     }
+
+    $("#highscore-number").text(TapTen.pad(this.currentHighScore, 7));
+
+    if (this.score > this.currentHighScore) {
+      this.currentHighScore = this.score;
+      $("#score-text").text(TapTen.LOCALES[TapTen.LANGUAGE]["NEW_HIGHSCORE_TEXT"]);
+      $("#score-container").addClass("new-high-score");
+      TapTen.setCookie("highscore", this.currentHighScore, 100);
+    }
+
     this.showEnd();
   }
 
   this.showStart = function() {
     $("#score-container").hide();
+    $("#highscore-container").hide();
     $("#countdown-container").hide();
     $("#language-container").show();
 
     this.despawnHexagons();
     this.spawnHexagons();
 
-    var totalHexagonNum = this.hexagons.length;
-    for (var hex = 0; hex < totalHexagonNum; ++hex) {
-      $(this.hexagons[hex].hexMiddle).text(TapTen.LOCALES[TapTen.LANGUAGE]["HEXAGON_START_TEXTS"][hex]);
-    }
+    this.spawnHexagonText("HEXAGON_START_TEXTS");
 
-    $(this.hexagons[2].hexMiddle).addClass("hex-title");
+    this.spawnSocialButtons(19, 20, 21);
+
+    $(this.hexagons[2].text).addClass("hex-title");
+
     $(this.hexagons[11].hexTop).addClass("hex-start-top");
     $(this.hexagons[11].hexMiddle).addClass("hex-start-middle");
     $(this.hexagons[11].hexBottom).addClass("hex-start-bottom");
 
-    // language selection
-    var flagEn = document.createElement("div");
-    $(flagEn).addClass("flag flag-en");
-    $(this.hexagons[1].hexMiddle).append(flagEn);
+    $(this.hexagons[15].hexTop).addClass("hex-howto-top");
+    $(this.hexagons[15].hexMiddle).addClass("hex-howto-middle");
+    $(this.hexagons[15].hexBottom).addClass("hex-howto-bottom");
 
-    var flagDe = document.createElement("div");
-    $(flagDe).addClass("flag flag-de");
-    $(this.hexagons[3].hexMiddle).append(flagDe);
+    $(this.hexagons[16].hexTop).addClass("hex-neutral-top");
+    $(this.hexagons[16].hexMiddle).addClass("hex-neutral-middle");
+    $(this.hexagons[16].hexBottom).addClass("hex-neutral-bottom");
 
     var self = this;
+    $(this.hexagons[15].hex).click( function() {
+      self.showHowTo(0);
+    });
+
+    $(this.hexagons[16].hex).click( function() {
+      self.showAbout();
+    });
+
     $(this.hexagons[11].hex).click( function() {
       self.despawnHexagons();
       self.spawnHexagons();
@@ -185,86 +260,196 @@ TapTen.App = function() {
     });
   }
 
+  this.showAbout = function() {
+    $("#score-container").hide();
+    $("#countdown-container").hide();
+    $("#language-container").hide();
+
+    this.despawnHexagons();
+    this.spawnHexagons();
+
+    this.spawnHexagonText("HEXAGON_ABOUT_TEXTS");
+
+    $(this.hexagons[2].text).addClass("hex-title");
+
+    $(this.hexagons[20].hexTop).addClass("hex-neutral-top");
+    $(this.hexagons[20].hexMiddle).addClass("hex-neutral-middle");
+    $(this.hexagons[20].hexBottom).addClass("hex-neutral-bottom");
+
+    var self = this;
+    $(this.hexagons[20].hex).click( function() {
+      self.showStart();
+    });
+
+  }
+
+  this.showHowTo = function(stageId) {
+    $("#score-container").hide();
+    $("#highscore-container").hide();
+    $("#countdown-container").hide();
+    $("#language-container").hide();
+
+    this.despawnHexagons();
+    this.spawnHexagons();
+
+    this.spawnHexagonText("HEXAGON_HOWTO_TEXTS_" + stageId);
+
+    $(this.hexagons[2].text).addClass("hex-title");
+
+    var windowTimeoutId = -1;
+    var randomFillIntervalId = -1;
+    var self = this;
+
+    // activate stage specific stuff
+    if (stageId == 0) {
+      windowTimeoutId =
+      window.setTimeout(function() {
+        self.hexagons[11].activate(1, true);
+      }
+      , 2000);
+    } else if (stageId == 1) {
+      this.hexagons[11].activate(1, true);
+      this.score = 0;
+      $("#score-number").text(TapTen.pad(this.score, 7));
+      $("#score-container").show();
+    } else if (stageId == 2) {
+      this.hexagons[11].activate(10, false);
+    } else if (stageId == 3) {
+      windowTimeoutId =
+      window.setTimeout(function() {
+        self.hexagons[11].activate(-5, false);
+      }
+      , 2000);
+    } else if (stageId == 4) {
+      // begin to randomly fill the field with hexagons after 5 seconds
+      windowTimeoutId =
+      window.setTimeout(function() {
+        randomFillIntervalId =
+        window.setInterval(function() {
+          var totalHexagonNum = self.hexagons.length;
+
+          for (var elem = 0; elem < 5; ++elem) {
+            var availableHexagons = [];
+
+            for (var i = 0; i < totalHexagonNum; ++i) {
+              var currentHex = self.hexagons[i];
+              if (!currentHex.active && i!=2 && i != 19 && i != 21) {
+                availableHexagons.push(currentHex);
+              }
+            }
+
+            var availableHexagonNum = availableHexagons.length;
+            if (availableHexagonNum >= self.hexagonsToBeSelected - elem) {
+              var randomId = TapTen.random(0, availableHexagonNum - 1);
+
+              availableHexagons[randomId].activate(1, false);
+              $(availableHexagons[randomId].text).html("");
+            }
+          }
+        }
+        , 1000);
+      }
+      , 5000);
+    } else if (stageId == 5) {
+      this.spawnSocialButtons(10, 11, 12);
+    }
+
+
+    // set buttons and their actions
+    $(this.hexagons[19].hexTop).addClass("hex-neutral-top");
+    $(this.hexagons[19].hexMiddle).addClass("hex-neutral-middle");
+    $(this.hexagons[19].hexBottom).addClass("hex-neutral-bottom");
+
+    $(this.hexagons[21].hexTop).addClass("hex-neutral-top");
+    $(this.hexagons[21].hexMiddle).addClass("hex-neutral-middle");
+    $(this.hexagons[21].hexBottom).addClass("hex-neutral-bottom");
+
+    function clearWindowCallbacks() {
+      if (randomFillIntervalId != -1) {
+        window.clearInterval(randomFillIntervalId);
+      }
+
+      if (windowTimeoutId != -1) {
+        window.clearTimeout(windowTimeoutId);
+      }
+    }
+
+    if (stageId == 0) {
+      $(this.hexagons[19].hex).click(function() {
+        clearWindowCallbacks();
+        self.showStart();
+      });
+    } else {
+      $(this.hexagons[19].hex).click(function() {
+        clearWindowCallbacks();
+        self.showHowTo(stageId - 1);
+      });
+    }
+
+    if (stageId == 5) {
+      $(this.hexagons[21].hex).click(function() {
+        clearWindowCallbacks();
+        self.showStart();
+      });
+
+      $(self.hexagons[20].hexTop).addClass("hex-start-top");
+      $(self.hexagons[20].hexMiddle).addClass("hex-start-middle");
+      $(self.hexagons[20].hexBottom).addClass("hex-start-bottom");
+
+      $(this.hexagons[20].hex).click(function() {
+        clearWindowCallbacks();
+        self.despawnHexagons();
+        self.spawnHexagons();
+        self.run();
+      });
+    } else {
+      $(this.hexagons[21].hex).click(function() {
+        clearWindowCallbacks();
+        self.showHowTo(stageId + 1);
+      });
+    }
+
+  }
+
   this.showEnd = function() {
     $("#countdown-container").hide();
+    $("#language-container").hide();
+    $("#highscore-container").show();
 
     this.despawnHexagons();
     this.spawnHexagons();
 
     // first, show time up texts
-    var totalHexagonNum = this.hexagons.length;
-    for (var hex = 0; hex < totalHexagonNum; ++hex) {
-      $(this.hexagons[hex].hexMiddle).text(TapTen.LOCALES[TapTen.LANGUAGE]["HEXAGON_TIME_UP_TEXTS"][hex]);
-    }
+    this.spawnHexagonText("HEXAGON_TIME_UP_TEXTS");
 
     var self = this;
     // after some time, show replay/share screen
     window.setTimeout(function() {
-      for (var hex = 0; hex < totalHexagonNum; ++hex) {
-        $(self.hexagons[hex].hexMiddle).text(TapTen.LOCALES[TapTen.LANGUAGE]["HEXAGON_END_TEXTS"][hex]);
-      }
+      self.spawnHexagonText("HEXAGON_END_TEXTS");
 
-      $(self.hexagons[1].hexMiddle).addClass("hex-title");
-      $(self.hexagons[2].hexMiddle).addClass("hex-title");
-      $(self.hexagons[3].hexMiddle).addClass("hex-title");
+      $(self.hexagons[1].text).addClass("hex-title");
+      $(self.hexagons[2].text).addClass("hex-title");
+      $(self.hexagons[3].text).addClass("hex-title");
 
       $(self.hexagons[19].hexTop).addClass("hex-end-top");
       $(self.hexagons[19].hexMiddle).addClass("hex-end-middle");
       $(self.hexagons[19].hexBottom).addClass("hex-end-bottom");
 
-      $(self.hexagons[21].hexTop).addClass("hex-start-top");
-      $(self.hexagons[21].hexMiddle).addClass("hex-start-middle");
-      $(self.hexagons[21].hexBottom).addClass("hex-start-bottom");
-
-      $(self.hexagons[10].hexTop).addClass("hex-facebook-top");
-      $(self.hexagons[10].hexMiddle).addClass("hex-facebook-middle");
-      $(self.hexagons[10].hexBottom).addClass("hex-facebook-bottom");
-
-      var facebookIcon = document.createElement("div");
-      $(facebookIcon).addClass("fa fa-facebook");
-      $(self.hexagons[10].hexMiddle).append(facebookIcon);
-
-      $(self.hexagons[10].hex).click(function(){
-        FB.ui({
-          method: 'share',
-          href: 'thelaui.github.io/TapTen',
-        }, function(response){});
-      });
-      $(self.hexagons[11].hexTop).addClass("hex-google-top");
-      $(self.hexagons[11].hexMiddle).addClass("hex-google-middle");
-      $(self.hexagons[11].hexBottom).addClass("hex-google-bottom");
-
-      var googleIcon = document.createElement("div");
-      $(googleIcon).addClass("fa fa-google-plus");
-      $(self.hexagons[11].hexMiddle).append(googleIcon);
-
-      $(self.hexagons[11].hex).click(function(){
-        TapTen.socialPopup("google");
-        return false;
-      });
-
-      $(self.hexagons[12].hexTop).addClass("hex-twitter-top");
-      $(self.hexagons[12].hexMiddle).addClass("hex-twitter-middle");
-      $(self.hexagons[12].hexBottom).addClass("hex-twitter-bottom");
-
-      $(self.hexagons[12].hex).click(function(){
-        TapTen.socialPopup("twitter");
-        return false;
-      });
-
-      var twitterIcon = document.createElement("div");
-      $(twitterIcon).addClass("fa fa-twitter");
-      $(self.hexagons[12].hexMiddle).append(twitterIcon);
-
       $(self.hexagons[19].hex).click( function() {
         self.showStart();
       });
+
+      $(self.hexagons[21].hexTop).addClass("hex-start-top");
+      $(self.hexagons[21].hexMiddle).addClass("hex-start-middle");
+      $(self.hexagons[21].hexBottom).addClass("hex-start-bottom");
 
       $(self.hexagons[21].hex).click( function() {
         self.despawnHexagons();
         self.spawnHexagons();
         self.run();
       });
+
+      self.spawnSocialButtons(10, 11, 12);
     }, 2000);
 
   }
@@ -280,6 +465,12 @@ TapTen.App = function() {
     TapTen.LANGUAGE = "de";
     self.showStart();
   });
+
+  // get previous high score if possible
+  var highScore = TapTen.getCookie("highscore");
+  if (highScore != "") {
+    this.currentHighScore = parseInt(highScore);
+  }
 
   this.showStart();
 }
