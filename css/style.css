@@ -50,6 +50,7 @@ body {
 
 .new-high-score {
   color: #6c6 !important;
+  font-size: 2em !important;
 }
 
 #highscore-container {

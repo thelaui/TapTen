@@ -203,8 +203,8 @@
   margin-bottom: -15px;
   color: #333;
   text-align: center;
-  font-size: 0.8em;
-  line-height: 2.5em;
+  font-size: 0.7em;
+  line-height: 3em;
 }
 
 .hex .top {
@@ -230,9 +230,9 @@
 .hex .middle .counter{
   color: #333;
   text-align: center;
-  font-size: 1.8em;
+  font-size: 2.5em;
   font-weight: bold;
-  line-height: 1.4em;
+  line-height: 1.2em;
   cursor: default;
 }
 
@@ -357,6 +357,7 @@
 
 .hex-howto-middle {
   background-color: #ffd146 !important;
+  font-size: 0.8em !important;
   cursor: pointer;
 }
 

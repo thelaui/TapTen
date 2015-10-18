@@ -1,6 +1,6 @@
 if (!window.TapTen) { window.TapTen = new Object();}
 
-TapTen.LANGUAGE = "en"
+TapTen.LANGUAGE = "de"
 
 TapTen.SPAWN_INTERVAL = 5000;  // hexagon spawn interval in ms
 TapTen.MAX_DIFFICULTY = 23;
