@@ -47,6 +47,8 @@ TapTen.App = function() {
     for (var hex = 0; hex < totalHexagonNum; ++hex) {
       $(this.hexagons[hex].hex).remove();
     }
+
+    $(".hex-row").remove();
   };
 
   this.updateHexagons = function() {
@@ -231,6 +233,7 @@ TapTen.App = function() {
     this.spawnSocialButtons(19, 20, 21);
 
     $(this.hexagons[2].text).addClass("hex-title");
+    $(this.hexagons[22].text).addClass("hex-small");
 
     $(this.hexagons[11].hexTop).addClass("hex-start-top");
     $(this.hexagons[11].hexMiddle).addClass("hex-start-middle");
@@ -244,6 +247,10 @@ TapTen.App = function() {
     $(this.hexagons[16].hexMiddle).addClass("hex-neutral-middle");
     $(this.hexagons[16].hexBottom).addClass("hex-neutral-bottom");
 
+    $(this.hexagons[22].hexTop).addClass("hex-cursor");
+    $(this.hexagons[22].hexMiddle).addClass("hex-cursor");
+    $(this.hexagons[22].hexBottom).addClass("hex-cursor");
+
     var self = this;
     $(this.hexagons[15].hex).click( function() {
       self.showHowTo(0);
@@ -251,6 +258,10 @@ TapTen.App = function() {
 
     $(this.hexagons[16].hex).click( function() {
       self.showAbout();
+    });
+
+    $(this.hexagons[22].hex).click( function() {
+      self.showLanguageSelection();
     });
 
     $(this.hexagons[11].hex).click( function() {
@@ -277,6 +288,50 @@ TapTen.App = function() {
     $(this.hexagons[20].hexBottom).addClass("hex-neutral-bottom");
 
     var self = this;
+    $(this.hexagons[20].hex).click( function() {
+      self.showStart();
+    });
+
+  }
+
+  this.showLanguageSelection = function() {
+    $("#score-container").hide();
+    $("#countdown-container").hide();
+    $("#language-container").hide();
+
+    this.despawnHexagons();
+    this.spawnHexagons();
+
+    this.spawnHexagonText("HEXAGON_LANGUAGE_SELECTION_TEXTS");
+
+    $(this.hexagons[20].hexTop).addClass("hex-neutral-top");
+    $(this.hexagons[20].hexMiddle).addClass("hex-neutral-middle");
+    $(this.hexagons[20].hexBottom).addClass("hex-neutral-bottom");
+
+    $(this.hexagons[10].hexTop).addClass("hex-neutral-top");
+    $(this.hexagons[10].hexMiddle).addClass("hex-neutral-middle");
+    $(this.hexagons[10].hexBottom).addClass("hex-neutral-bottom");
+
+    $(this.hexagons[12].hexTop).addClass("hex-neutral-top");
+    $(this.hexagons[12].hexMiddle).addClass("hex-neutral-middle");
+    $(this.hexagons[12].hexBottom).addClass("hex-neutral-bottom");
+
+    // connect language buttons
+    var self = this;
+
+    $(this.hexagons[10].hex).click( function() {
+      TapTen.LANGUAGE = "en";
+      TapTen.setCookie("selectedLanguage", TapTen.LANGUAGE);
+      self.showLanguageSelection();
+    });
+
+    $(this.hexagons[12].hex).click( function() {
+      TapTen.LANGUAGE = "de";
+      TapTen.setCookie("selectedLanguage", TapTen.LANGUAGE);
+      self.showLanguageSelection();
+    });
+
+
     $(this.hexagons[20].hex).click( function() {
       self.showStart();
     });
@@ -453,20 +508,6 @@ TapTen.App = function() {
     }, 2000);
 
   }
-
-  // connect language buttons
-  var self = this;
-  $("#flag-en").click(function() {
-    TapTen.LANGUAGE = "en";
-    TapTen.setCookie("selectedLanguage", TapTen.LANGUAGE);
-    self.showStart();
-  });
-
-  $("#flag-de").click(function() {
-    TapTen.LANGUAGE = "de";
-    TapTen.setCookie("selectedLanguage", TapTen.LANGUAGE);
-    self.showStart();
-  });
 
   // get previously selected language if possible
   var selectedLanguage = TapTen.getCookie("selectedLanguage");

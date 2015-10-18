@@ -41,7 +41,7 @@ TapTen.Hexagon = function(parentDiv, app) {
   $(parentDiv).append(this.hex);
 
   var self = this;
-  $(this.hex).click(function() {
+  $(this.hex).click(function(event) {
     if (self.active) {
       --self.currentCount;
       self.updateStyle(false);
@@ -60,6 +60,21 @@ TapTen.Hexagon = function(parentDiv, app) {
       }
     }
   });
+
+  // $(this.hexTop).click(function(event) {
+  //   var triangleWidthHalf = parseInt($(self.hexTop).css("border-left-width"));
+  //   var triangleWidth = triangleWidthHalf * 2;
+  //   var triangleHeight = parseInt($(self.hexTop).css("border-bottom-width"));
+  //   var trianglePos = $(self.hexTop).offset();
+
+  //   var inTriangle =
+  //   TapTen.isPointInTriangle(event.clientX, event.clientY,
+  //                            trianglePos.left + triangleWidthHalf, trianglePos.top,
+  //                            trianglePos.left, trianglePos.top + triangleHeight,
+  //                            trianglePos.left + triangleWidth, trianglePos.top + triangleHeight);
+
+  //   console.log(inTriangle);
+  // });
 
   this.startCounter = function() {
     this.counterIntervalId =

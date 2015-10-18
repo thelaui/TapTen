@@ -58,3 +58,23 @@ TapTen.getCookie = function(cname) {
 
   return ""
 }
+
+// point coordinates must be given in counter-clockwise order
+TapTen.isPointInTriangle = function(pointX, pointY,
+                                    triPoint0X, triPoint0Y,
+                                    triPoint1X, triPoint1Y,
+                                    triPoint2X, triPoint2Y) {
+
+var area = 0.5 * (-triPoint1Y * triPoint2X +
+                  triPoint0Y * (-triPoint1X + triPoint2X) +
+                  triPoint0X * (triPoint1Y - triPoint2Y) +
+                  triPoint1X * triPoint2Y);
+
+
+var s = 1.0/(2.0 * area) * (triPoint0Y * triPoint2X - triPoint0X * triPoint2Y + (triPoint2Y - triPoint0Y) * pointX + (triPoint0X - triPoint2X) * pointY);
+var t = 1.0/(2.0 * area) * (triPoint0X * triPoint1Y - triPoint0Y * triPoint1X + (triPoint0Y - triPoint1Y) * pointX + (triPoint1X - triPoint0X) * pointY);
+var u = 1.0 - s - t;
+
+return 0 <= s && s <= 1.0 && 0 <= t && t <= 1.0 && 0 <= u && u <= 1.0;
+
+}

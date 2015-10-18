@@ -8,7 +8,7 @@ TapTen.LOCALES = {
       "", "", "", "",
       "", "", "START", "", "",
       "", "ANLEITUNG", "INFO", "",
-      "", "", "", "", ""
+      "", "", "", "", "SPRACHAUSWAHL"
     ],
     "HEXAGON_TIME_UP_TEXTS" : [
       "", "", "", "", "",
@@ -28,6 +28,13 @@ TapTen.LOCALES = {
       "", "", "TAP TEN", "", "",
       "", "", "", "",
       "", "&copy; 2015", "FELIX", "LAUER", "",
+      "", "", "", "",
+      "", "", "ZURÜCK", "", ""
+    ],
+    "HEXAGON_LANGUAGE_SELECTION_TEXTS" : [
+      "", "", "", "", "",
+      "", "WÄHLE EINE", "SPRACHE!", "",
+      "", "ENGLISH", "", "DEUTSCH", "",
       "", "", "", "",
       "", "", "ZURÜCK", "", ""
     ],
@@ -87,7 +94,7 @@ TapTen.LOCALES = {
       "", "", "", "",
       "", "", "START", "", "",
       "", "HOW TO PLAY?", "ABOUT", "",
-      "", "", "", "", ""
+      "", "", "", "", "SELECT LANGUAGE"
     ],
     "HEXAGON_TIME_UP_TEXTS" : [
       "", "", "", "", "",
@@ -108,7 +115,14 @@ TapTen.LOCALES = {
       "", "", "", "",
       "", "&copy; 2015", "FELIX", "LAUER", "",
       "", "", "", "",
-      "", "", "PREVIOUS", "", ""
+      "", "", "BACK", "", ""
+    ],
+    "HEXAGON_LANGUAGE_SELECTION_TEXTS" : [
+      "", "", "", "", "",
+      "", "CHOOSE A", "LANGUAGE!", "",
+      "", "ENGLISH", "", "DEUTSCH", "",
+      "", "", "", "",
+      "", "", "BACK", "", ""
     ],
     "HEXAGON_HOWTO_TEXTS_0" : [
       "", "", "#1", "", "",

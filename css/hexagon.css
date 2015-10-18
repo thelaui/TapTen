@@ -329,8 +329,14 @@
   /*font-weight: bold;*/
 }
 
+.hex-small {
+  font-size: 0.6em !important;
+}
+
+
 .hex-start-top {
   border-bottom-color: #6c6 !important;
+  cursor: pointer;
 }
 
 .hex-start-middle {
@@ -341,10 +347,12 @@
 
 .hex-start-bottom {
   border-top-color: #6c6 !important;
+  cursor: pointer;
 }
 
 .hex-howto-top {
   border-bottom-color: #ffd146 !important;
+  cursor: pointer;
 }
 
 .hex-howto-middle {
@@ -354,10 +362,12 @@
 
 .hex-howto-bottom {
   border-top-color: #ffd146 !important;
+  cursor: pointer;
 }
 
 .hex-neutral-top {
   border-bottom-color: #ccc !important;
+  cursor: pointer;
 }
 
 .hex-neutral-middle {
@@ -367,10 +377,12 @@
 
 .hex-neutral-bottom {
   border-top-color: #ccc !important;
+  cursor: pointer;
 }
 
 .hex-end-top {
   border-bottom-color: #ff3333 !important;
+  cursor: pointer;
 }
 
 .hex-end-middle {
@@ -381,6 +393,11 @@
 
 .hex-end-bottom {
   border-top-color: #ff3333 !important;
+  cursor: pointer;
+}
+
+.hex-cursor {
+  cursor: pointer;
 }
 
 
