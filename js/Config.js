@@ -1,5 +1,6 @@
 if (!window.TapTen) { window.TapTen = new Object();}
 
+TapTen.LANGUAGE = "en"
 
 TapTen.SPAWN_INTERVAL = 5000;  // hexagon spawn interval in ms
 TapTen.MAX_DIFFICULTY = 23;
@@ -13,7 +14,7 @@ TapTen.SPAWN_COUNTER_MIN_VALUE = 1;
 TapTen.SPAWN_COUNTER_MAX_VALUE = 2;
 
 TapTen.HEXAGON_START_TEXTS = [
-  "", "", "TAPTEN", "", "",
+  "", "", "TAP TEN", "", "",
   "TAP", "HEXAGONS", "TO REDUCE", "COUNTERS!",
   "", "", "START", "", "",
   "DIFFICULTY", "WILL", "INCREASE", "OVER TIME!",

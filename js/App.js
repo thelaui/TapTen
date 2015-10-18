@@ -105,11 +105,16 @@ TapTen.App = function() {
 
     $("#score-container").show();
     $("#countdown-container").show();
+    $("#language-container").hide();
+    $("#score-text").text(TapTen.LOCALES[TapTen.LANGUAGE]["SCORE_TEXT"]);
     $("#score-number").text(TapTen.pad(this.score, 7));
 
-    this.updateHexagons();
 
     var self = this;
+    this.updateHexagons();
+
+    $("#countdown-hexagons").text(TapTen.LOCALES[TapTen.LANGUAGE]["COUNTDOWN_HEXAGONS"]);
+    $("#countdown-seconds").text(TapTen.LOCALES[TapTen.LANGUAGE]["COUNTDOWN_SECONDS"]);
     $("#countdown-number").text(TapTen.SPAWN_INTERVAL / 1000 - self.updateCount);
     $("#countdown-amount").text(self.hexagonsToBeSelected);
 
@@ -148,20 +153,29 @@ TapTen.App = function() {
   this.showStart = function() {
     $("#score-container").hide();
     $("#countdown-container").hide();
+    $("#language-container").show();
 
     this.despawnHexagons();
     this.spawnHexagons();
 
     var totalHexagonNum = this.hexagons.length;
     for (var hex = 0; hex < totalHexagonNum; ++hex) {
-      $(this.hexagons[hex].hexMiddle).text(TapTen.HEXAGON_START_TEXTS[hex]);
+      $(this.hexagons[hex].hexMiddle).text(TapTen.LOCALES[TapTen.LANGUAGE]["HEXAGON_START_TEXTS"][hex]);
     }
 
-    // $(this.hexagons[1].hexMiddle).addClass("hex-flag-en-middle");
     $(this.hexagons[2].hexMiddle).addClass("hex-title");
     $(this.hexagons[11].hexTop).addClass("hex-start-top");
     $(this.hexagons[11].hexMiddle).addClass("hex-start-middle");
     $(this.hexagons[11].hexBottom).addClass("hex-start-bottom");
+
+    // language selection
+    var flagEn = document.createElement("div");
+    $(flagEn).addClass("flag flag-en");
+    $(this.hexagons[1].hexMiddle).append(flagEn);
+
+    var flagDe = document.createElement("div");
+    $(flagDe).addClass("flag flag-de");
+    $(this.hexagons[3].hexMiddle).append(flagDe);
 
     var self = this;
     $(this.hexagons[11].hex).click( function() {
@@ -180,15 +194,14 @@ TapTen.App = function() {
     // first, show time up texts
     var totalHexagonNum = this.hexagons.length;
     for (var hex = 0; hex < totalHexagonNum; ++hex) {
-      $(this.hexagons[hex].hexMiddle).text(TapTen.HEXAGON_TIME_UP_TEXTS[hex]);
+      $(this.hexagons[hex].hexMiddle).text(TapTen.LOCALES[TapTen.LANGUAGE]["HEXAGON_TIME_UP_TEXTS"][hex]);
     }
 
     var self = this;
     // after some time, show replay/share screen
     window.setTimeout(function() {
-      console.log(self);
       for (var hex = 0; hex < totalHexagonNum; ++hex) {
-        $(self.hexagons[hex].hexMiddle).text(TapTen.HEXAGON_END_TEXTS[hex]);
+        $(self.hexagons[hex].hexMiddle).text(TapTen.LOCALES[TapTen.LANGUAGE]["HEXAGON_END_TEXTS"][hex]);
       }
 
       $(self.hexagons[1].hexMiddle).addClass("hex-title");
@@ -255,6 +268,18 @@ TapTen.App = function() {
     }, 2000);
 
   }
+
+  // connect language buttons
+  var self = this;
+  $("#flag-en").click(function() {
+    TapTen.LANGUAGE = "en";
+    self.showStart();
+  });
+
+  $("#flag-de").click(function() {
+    TapTen.LANGUAGE = "de";
+    self.showStart();
+  });
 
   this.showStart();
 }
