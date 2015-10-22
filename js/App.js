@@ -37,6 +37,7 @@ TapTen.App = function() {
         this.hexagons[rowOffset + x] = hex;
       }
       $("#hex-container").append(row);
+      $("#hex-container").append('<br class="hex-row-break"/>');
       rowOffset += cols;
     }
   };
@@ -49,6 +50,7 @@ TapTen.App = function() {
     }
 
     $(".hex-row").remove();
+    $(".hex-row-break").remove();
   };
 
   this.updateHexagons = function() {
